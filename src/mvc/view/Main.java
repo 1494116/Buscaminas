@@ -3,20 +3,18 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import PRAC.TQS.Vista.VistaVentanaAux;
 import mvc.controller.Partida;
 import mvc.model.Puntuaciones;
+import mvc.model.TableroMock;
 
 public class Main {
-	
 	//Para los mock objects
     private MainAux mockmain;
     public void setMainMock(MainAux m) {
-    	this.mockmain=m;
+        this.mockmain=m;
     }
 
 	public static void main(String[] args) throws IOException {
-	    
 		int opcion = 0, posX = 0, posY = 0, seguir = 1;
 		boolean posValida = false, entrada = true;
 		String salir;
@@ -35,6 +33,7 @@ public class Main {
 						System.out.println("Pulsa 4: Nivel Muy Dificil");
 						System.out.println("Pulsa 5: Salir");
 						opcion = sc.nextInt();
+						System.out.println(opcion);
 					}
 					
 					switch(opcion) {
