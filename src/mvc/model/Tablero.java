@@ -1,6 +1,7 @@
 package mvc.model;
 
-import mvc.view.MockTableroAux;
+import mvc.view.MainAux;
+import mvc.view.MainAuxMock;
 
 public class Tablero {
 	protected int nivel = 1;
@@ -12,12 +13,94 @@ public class Tablero {
     public int casilla_destapada = 0;
     public int minas_detectadas = 0;
     
+    private MainAux mockmain;
+    public void setMainMock(MainAux m) {
+    	this.mockmain=m;
+    }
+    
 	public Tablero(int nivel) {
 		setNivel(nivel);
 		setMedida(nivel);
 		setBombas(nivel);
 		this.tablero=iniciarTablero();
+		//crearMinas();
 		repartirBombasManual();
+	}
+	
+	public void repartirBombasManual() {
+		
+        MainAuxMock mockmain= new MainAuxMock();
+        int [][] bombas=mockmain.pasarBombas();
+		int contador = 0;
+		while(bombas_tablero<getBombas()){
+			//Creacio aleatoria fil,col per insertar mina
+            int fila=bombas[contador][0];
+            int columna=bombas[contador][1];
+            contador++;
+			//Si no hi hamina en la pos actual -> Posem mina
+			if(this.tablero[fila][columna].getMina()==false){
+				
+				setBombasPartida(1);
+				this.tablero[fila][columna].setValor(-1);
+				this.tablero[fila][columna].setMina(true);
+				/*System.out.print(this.tablero[fila][columna].getMina()+ "\n");
+				System.out.print(this.tablero[fila][columna].getValor()+ "\n");*/
+				//Modificar vecinas con 0, 1 o 2 segun cuantas haya cerca de minas
+				for(int i=0;i<MAX_Valor_casilla;i++){
+				switch(i){
+					case 0:
+						if(fila-1>=0&&columna-1>=0){
+							if(this.tablero[fila-1][columna-1].getMina()==false)
+							this.tablero[fila-1][columna-1].setValor(1);
+						}
+						break;
+				    case 1:
+						if(fila-1>=0&&columna>=0){
+							if(this.tablero[fila-1][columna].getMina()==false)
+							this.tablero[fila-1][columna].setValor(1);
+						}
+						break;
+					case 2:
+						if(fila>=0&&columna-1>=0){
+							if(this.tablero[fila][columna-1].getMina()==false)
+							this.tablero[fila][columna-1].setValor(1);
+						}
+						break;				
+					case 3:
+						if(fila+1>=0&&columna+1>=0&&fila<medida-1&&columna<medida-1){
+							if(this.tablero[fila+1][columna+1].getMina()==false)
+							this.tablero[fila+1][columna+1].setValor(1);
+						}
+						break;
+					case 4:
+						if(fila+1>=0&&columna>=0&&fila<medida-1){
+							if(this.tablero[fila+1][columna].getMina()==false)
+							this.tablero[fila+1][columna].setValor(1);
+						}
+						break;
+					case 5:
+						if(fila>=0&&columna+1>=0&&columna<medida-1){
+							if(this.tablero[fila][columna+1].getMina()==false)
+							this.tablero[fila][columna+1].setValor(1);
+						}
+						break;
+					case 6:
+						if(fila-1>=0&&columna+1>=0&&columna<medida-1){
+							if(this.tablero[fila-1][columna+1].getMina()==false)
+							this.tablero[fila-1][columna+1].setValor(1);
+						}
+						break;
+					case 7:
+						if(fila+1>=0&&columna-1>=0&&fila<medida-1){
+							if(this.tablero[fila+1][columna-1].getMina()==false)
+							this.tablero[fila+1][columna-1].setValor(1);
+							
+						}
+						break;
+					}
+				}
+			}
+		}
 	}
 	
 
@@ -215,89 +298,6 @@ public class Tablero {
 		}
 	}
 
-	
-	
-	public void repartirBombasManual() {
-		MockTableroAux mock=new MockTableroAux();
-		int [][] bombas=mock.pasarBombas();
-		int contador=0;
-		while(bombas_tablero<getBombas()){
-			
-			//Creacio aleatoria fil,col per insertar mina
-			//int fila = (int) Math.floor(Math.random()*getMedida());
-			//int columna= (int) Math.floor(Math.random()*getMedida());
-			  int fila=bombas[contador][0];
-			  int columna=bombas[contador][1];
-			  contador++;
-			//Si no hi hamina en la pos actual -> Posem mina
-			if(this.tablero[fila][columna].getMina()==false){
-				
-				setBombasPartida(1);
-				this.tablero[fila][columna].setValor(-1);
-				this.tablero[fila][columna].setMina(true);
-				/*System.out.print(this.tablero[fila][columna].getMina()+ "\n");
-				System.out.print(this.tablero[fila][columna].getValor()+ "\n");*/
-				//Modificar vecinas con 0, 1 o 2 segun cuantas haya cerca de minas
-				for(int i=0;i<MAX_Valor_casilla;i++){
-				switch(i){
-					case 0:
-						if(fila-1>=0&&columna-1>=0){
-							if(this.tablero[fila-1][columna-1].getMina()==false)
-							this.tablero[fila-1][columna-1].setValor(1);
-						}
-						break;
-				    case 1:
-						if(fila-1>=0&&columna>=0){
-							if(this.tablero[fila-1][columna].getMina()==false)
-							this.tablero[fila-1][columna].setValor(1);
-						}
-						break;
-					case 2:
-						if(fila>=0&&columna-1>=0){
-							if(this.tablero[fila][columna-1].getMina()==false)
-							this.tablero[fila][columna-1].setValor(1);
-						}
-						break;				
-					case 3:
-						if(fila+1>=0&&columna+1>=0&&fila<medida-1&&columna<medida-1){
-							if(this.tablero[fila+1][columna+1].getMina()==false)
-							this.tablero[fila+1][columna+1].setValor(1);
-						}
-						break;
-					case 4:
-						if(fila+1>=0&&columna>=0&&fila<medida-1){
-							if(this.tablero[fila+1][columna].getMina()==false)
-							this.tablero[fila+1][columna].setValor(1);
-						}
-						break;
-					case 5:
-						if(fila>=0&&columna+1>=0&&columna<medida-1){
-							if(this.tablero[fila][columna+1].getMina()==false)
-							this.tablero[fila][columna+1].setValor(1);
-						}
-						break;
-					case 6:
-						if(fila-1>=0&&columna+1>=0&&columna<medida-1){
-							if(this.tablero[fila-1][columna+1].getMina()==false)
-							this.tablero[fila-1][columna+1].setValor(1);
-						}
-						break;
-					case 7:
-						if(fila+1>=0&&columna-1>=0&&fila<medida-1){
-							if(this.tablero[fila+1][columna-1].getMina()==false)
-							this.tablero[fila+1][columna-1].setValor(1);
-							
-						}
-						break;
-					}
-				}
-			}
-		}
-	}
-	
-	
-	
-	
 	public Casilla[][] iniciarTablero() {
 		this.tablero = new Casilla[medida][medida];
 		for(int i=0; i<this.tablero.length; i++) {
