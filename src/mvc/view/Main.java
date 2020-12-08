@@ -3,12 +3,20 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import PRAC.TQS.Vista.VistaVentanaAux;
 import mvc.controller.Partida;
 import mvc.model.Puntuaciones;
 
 public class Main {
+	
+	//Para los mock objects
+    private MainAux mockmain;
+    public void setMainMock(MainAux m) {
+    	this.mockmain=m;
+    }
 
 	public static void main(String[] args) throws IOException {
+	    
 		int opcion = 0, posX = 0, posY = 0, seguir = 1;
 		boolean posValida = false, entrada = true;
 		String salir;
