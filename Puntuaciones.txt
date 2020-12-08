@@ -1,3 +1,8 @@
-wer 203 3
-soomoscracks 20 1
-PUTA 8 1
+Prueba1 1 1
+Prueba2 18 1
+Prueba3 23 1
+Prueba5 17 1
+Prueba6 20 1
+Prueba7 90 2
+Prueba8 211 3
+Prueba9 380 4
