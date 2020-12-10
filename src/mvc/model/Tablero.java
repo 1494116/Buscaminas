@@ -27,6 +27,11 @@ public class Tablero {
 		repartirBombasManual();
 	}
 	
+	public Casilla getCasilla(int x, int y) {
+		Casilla c = tablero[x][y];
+		return c;	
+	}
+	
 	public void repartirBombasManual() {
 		
         MainAuxMock mockmain= new MainAuxMock();

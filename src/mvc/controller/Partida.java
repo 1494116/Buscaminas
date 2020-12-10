@@ -12,6 +12,11 @@ public class Partida {
 		enJuego = true;
 	}
 	
+	public Casilla getCasilla(int x, int y) {
+		Casilla c = tablero.getCasilla(x,y);
+		return c;	
+	}
+	
 	public int continuarJuego(String input) {
 		switch (input.toLowerCase()) {
 			case "s": return 0;

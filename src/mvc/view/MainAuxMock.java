@@ -3,20 +3,20 @@ package mvc.view;
 public class MainAuxMock implements MainAux{
 
 	@Override
-	public int pasarNivel(int p) {
+	public int pasarNivel(int partida) {
 		int []nivel= {1,1,1,5,1,1,2,3,4};
-		return nivel[p];
+		return nivel[partida];
 	}
 
 	@Override
-	public int[][] pasarJugada(int p) {
+	public int[][] pasarJugada(int partida) {
 		int[][]jugadas = null;
-		switch(p) {
+		switch(partida) {
 		case 0:		//Partida mala suerte
-			jugadas= new int[][] {{3,1,1}};
+			jugadas= new int[][] {{3,10,10},{3,1,1}};
 			break;
 		case 1:		//Partida perdida
-			jugadas= new int[][] {{3,5,1},{3,1,5},{1,3,3},{3,2,2}};
+			jugadas= new int[][] {{3,5,1},{3,5,1},{3,1,5},{1,3,3},{3,2,2}};
 			break;
 		case 2:		//Partida completa ganada
 			jugadas= new int[][] {{3,5,1},{3,1,5},{1,3,3},{1,2,2},{3,2,1},{1,1,1},{2,1,1},{3,1,2},{3,5,4},{3,4,5}};
@@ -53,9 +53,9 @@ public class MainAuxMock implements MainAux{
 	}
 
 	@Override
-	public String pasarNombre(int p) {
+	public String pasarNombre(int partida) {
 		String [] nombres= {"Prueba1","Prueba2","Prueba3","Prueba4","Prueba5","Prueba6","Prueba7","Prueba8","Prueba9"};
-		return nombres[p];
+		return nombres[partida];
 	}
 
 }

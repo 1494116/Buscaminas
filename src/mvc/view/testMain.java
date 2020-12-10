@@ -23,6 +23,8 @@ class testMain {
 	void tearDown() throws Exception {
 	}
 
+	
+	//Test donde abriremos una casilla fuera del tablero y luego abriremos una bomba
 	@Test
 	void testPartida1() throws IOException {
 		
@@ -108,11 +110,28 @@ class testMain {
 											posY = jugadas[contador][2];
 											System.out.println(posY+"\n");
 											posValida = partida.posCorrecta(posX-1, posY-1);
+											if(contador==0)		//En la primera jugada abrimos una casilla fuera de tablero
+												assertEquals(posValida,false);
+											else
+												assertEquals(posValida,true);
 											if(!posValida) {
 												System.out.println("Numeros incorrectos\n");
 											}
+											contador++;
 										}
-										partida.marcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.marcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 2:
 										while(!posValida) {
@@ -123,11 +142,28 @@ class testMain {
 											posY = jugadas[contador][2];
 											System.out.println(posY+"\n");
 											posValida = partida.posCorrecta(posX-1, posY-1);
+											if(contador==0)		//En la primera jugada abrimos una casilla fuera de tablero
+												assertEquals(posValida,false);
+											else
+												assertEquals(posValida,true);
 											if(!posValida) {
 												System.out.println("Numeros incorrectos");
 											}
+											contador++;
 										}
-										partida.desmarcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}	
 										break;
 									case 3:
 										while(!posValida) {
@@ -138,11 +174,25 @@ class testMain {
 											posY = jugadas[contador][2];
 											System.out.println(posY+"\n");
 											posValida = partida.posCorrecta(posX-1, posY-1);
+											if(contador==0)		//En la primera jugada abrimos una casilla fuera de tablero
+												assertEquals(posValida,false);
+											else
+												assertEquals(posValida,true);
 											if(!posValida) {
 												System.out.println("Numeros incorrectos");
 											}
+											contador++;
 										}
-										partida.destaparCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
+										else {		
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
 										if(!partida.getEnJuego()) {
 											System.out.println("------------");
 											System.out.println("Has perdido!");
@@ -173,9 +223,6 @@ class testMain {
 							System.out.println();
 							sc.next();
 						}
-	
-	
-						contador++;
 					}
 					if (partida.getPuntuacion()>0) {
 						System.out.println("Nom del jugador?\n");
@@ -203,6 +250,7 @@ class testMain {
 			System.out.println("----- FINAL PARTIDA 1 Mala suerte -----\n" + "\n");
 	}	
 
+	//Test donde abriremos la misma casilla 2 veces, marcaremos una bomba y luego abriremos una bomba
 	@Test
 	void testPartida2() throws IOException {
 		
@@ -292,7 +340,19 @@ class testMain {
 												System.out.println("Numeros incorrectos\n");
 											}
 										}
-										partida.marcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.marcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 2:
 										while(!posValida) {
@@ -307,7 +367,19 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.desmarcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 3:
 										while(!posValida) {
@@ -322,7 +394,16 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.destaparCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
+										else {		
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
 										if(!partida.getEnJuego()) {
 											System.out.println("------------");
 											System.out.println("Has perdido!");
@@ -383,6 +464,7 @@ class testMain {
 			System.out.println("----- FINAL PARTIDA 2 Partida Nivel 1 Perdida -----\n" + "\n");
 	}
 	
+	//Test donde ganamos una partida en la que marcamos, intentamos desmarcar y abrimos lo necesario para ganar
 	@Test
 	void testPartida3() throws IOException {
 		
@@ -472,7 +554,19 @@ class testMain {
 												System.out.println("Numeros incorrectos\n");
 											}
 										}
-										partida.marcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.marcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 2:
 										while(!posValida) {
@@ -486,8 +580,20 @@ class testMain {
 											if(!posValida) {
 												System.out.println("Numeros incorrectos");
 											}
+										}	
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
 										}
-										partida.desmarcarCasilla(posX-1, posY-1);
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}															
 										break;
 									case 3:
 										while(!posValida) {
@@ -502,7 +608,16 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.destaparCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
+										else {		
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
 										if(!partida.getEnJuego()) {
 											System.out.println("------------");
 											System.out.println("Has perdido!");
@@ -563,6 +678,7 @@ class testMain {
 			System.out.println("----- FINAL PARTIDA 3 Partida Nivel 1 completa ganada -----\n" + "\n");
 	}
 	
+	//Test donde salimos del juego sin haberlo empezado
 	@Test
 	void testPartida4() throws IOException {
 		
@@ -609,6 +725,7 @@ class testMain {
 									if(seguir == 0) {
 										System.out.println("Vuelve pronto!");
 										partida.setEnJuego(false);
+										assertEquals(partida.getEnJuego(),false);
 										entrada=false;
 										sc.close();	
 									}else {
@@ -652,7 +769,19 @@ class testMain {
 													System.out.println("Numeros incorrectos\n");
 												}
 											}
-											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+												assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+												partida.marcarCasilla(posX-1, posY-1);
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+											}
+											else {
+												assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+												partida.marcarCasilla(posX-1, posY-1);
+												if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+													assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+												else
+													assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+											}	
 											break;
 										case 2:
 											while(!posValida) {
@@ -667,7 +796,19 @@ class testMain {
 													System.out.println("Numeros incorrectos");
 												}
 											}
-											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+												assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+												partida.desmarcarCasilla(posX-1, posY-1);
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+											}
+											else {
+												assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+												partida.desmarcarCasilla(posX-1, posY-1);
+												if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+													assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+												else
+													assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+											}
 											break;
 										case 3:
 											while(!posValida) {
@@ -682,7 +823,16 @@ class testMain {
 													System.out.println("Numeros incorrectos");
 												}
 											}
-											partida.destaparCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+												assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+												partida.destaparCasilla(posX-1, posY-1);
+												assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											}
+											else {		
+												assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+												partida.destaparCasilla(posX-1, posY-1);
+												assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											}
 											if(!partida.getEnJuego()) {
 												System.out.println("------------");
 												System.out.println("Has perdido!");
@@ -743,6 +893,7 @@ class testMain {
 				System.out.println("----- FINAL PARTIDA 4 Partida sin empezar  -----\n" + "\n");
 	}
 	
+	//Test donde salimos de la partida a la mitad
 	@Test
 	void testPartida5() throws IOException {
 		
@@ -832,7 +983,19 @@ class testMain {
 												System.out.println("Numeros incorrectos\n");
 											}
 										}
-										partida.marcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.marcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}	
 										break;
 									case 2:
 										while(!posValida) {
@@ -847,7 +1010,19 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.desmarcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 3:
 										while(!posValida) {
@@ -862,7 +1037,16 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.destaparCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
+										else {		
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
 										if(!partida.getEnJuego()) {
 											System.out.println("------------");
 											System.out.println("Has perdido!");
@@ -882,8 +1066,11 @@ class testMain {
 										seguir = partida.continuarJuego(salir);
 										if(seguir == 0) {
 											partida.setEnJuego(false);
+											assertEquals(partida.getEnJuego(),false);
 											entrada=false;
 										}
+										else
+											assertEquals(partida.getEnJuego(),true);
 										break;
 								}
 								
@@ -927,6 +1114,7 @@ class testMain {
 			System.out.println("----- FINAL PARTIDA 5  Partida saliendo a la mitad -----\n" + "\n");
 	}
 	
+	//Test donde ponemos el nivel incorrectamente y despues ganamos
 	@Test
 	void testPartida6() throws IOException {
 		//Creamos mockObject del main
@@ -1020,7 +1208,19 @@ class testMain {
 												System.out.println("Numeros incorrectos\n");
 											}
 										}
-										partida.marcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.marcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}	
 										break;
 									case 2:
 										while(!posValida) {
@@ -1035,7 +1235,19 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.desmarcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 3:
 										while(!posValida) {
@@ -1050,7 +1262,16 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.destaparCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
+										else {		
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
 										if(!partida.getEnJuego()) {
 											System.out.println("------------");
 											System.out.println("Has perdido!");
@@ -1112,6 +1333,7 @@ class testMain {
 		
 	}
 	
+	//Test donde perdemos una partida de nivel 2
 	@Test
 	void testPartida7() throws IOException {
 		//Creamos mockObject del main
@@ -1200,7 +1422,19 @@ class testMain {
 												System.out.println("Numeros incorrectos\n");
 											}
 										}
-										partida.marcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.marcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}	
 										break;
 									case 2:
 										while(!posValida) {
@@ -1215,7 +1449,19 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.desmarcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 3:
 										while(!posValida) {
@@ -1230,7 +1476,16 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.destaparCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
+										else {		
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
 										if(!partida.getEnJuego()) {
 											System.out.println("------------");
 											System.out.println("Has perdido!");
@@ -1292,6 +1547,7 @@ class testMain {
 		
 	}
 	
+	//Test donde perdemos una partida de nivel 3
 	@Test
 	void testPartida8() throws IOException {
 		//Creamos mockObject del main
@@ -1380,7 +1636,19 @@ class testMain {
 												System.out.println("Numeros incorrectos\n");
 											}
 										}
-										partida.marcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.marcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}	
 										break;
 									case 2:
 										while(!posValida) {
@@ -1395,7 +1663,19 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.desmarcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 3:
 										while(!posValida) {
@@ -1410,7 +1690,16 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.destaparCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
+										else {		
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
 										if(!partida.getEnJuego()) {
 											System.out.println("------------");
 											System.out.println("Has perdido!");
@@ -1472,6 +1761,7 @@ class testMain {
 		
 	}
 	
+	//Test donde ganamos una partida nivel 4 solamente abriendo casillas
 	@Test
 	void testPartida9() throws IOException {
 		//Creamos mockObject del main
@@ -1560,7 +1850,19 @@ class testMain {
 												System.out.println("Numeros incorrectos\n");
 											}
 										}
-										partida.marcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.marcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.marcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}	
 										break;
 									case 2:
 										while(!posValida) {
@@ -1575,7 +1877,19 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.desmarcarCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
+										else {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.desmarcarCasilla(posX-1, posY-1);
+											if(partida.getCasilla(posX-1, posY-1).getMina()==true)
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),true);
+											else
+												assertEquals(partida.getCasilla(posX-1, posY-1).getMarcado(),false);
+										}
 										break;
 									case 3:
 										while(!posValida) {
@@ -1590,7 +1904,16 @@ class testMain {
 												System.out.println("Numeros incorrectos");
 											}
 										}
-										partida.destaparCasilla(posX-1, posY-1);
+										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
+										else {		
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),false);
+											partida.destaparCasilla(posX-1, posY-1);
+											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
+										}
 										if(!partida.getEnJuego()) {
 											System.out.println("------------");
 											System.out.println("Has perdido!");
@@ -1651,5 +1974,7 @@ class testMain {
 			System.out.println("----- FINAL PARTIDA 9 Partida Nivel 4 ganada -----\n" + "\n");
 		
 	}	
+	
+	
 	
 }
