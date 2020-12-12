@@ -1114,7 +1114,7 @@ class testMain {
 			System.out.println("----- FINAL PARTIDA 5  Partida saliendo a la mitad -----\n" + "\n");
 	}
 	
-	//Test donde ponemos el nivel incorrectamente y despues ganamos
+	//Test donde ponemos el nivel y la fila/columna incorrectamente y despues ganamos
 	@Test
 	void testPartida6() throws IOException {
 		//Creamos mockObject del main
@@ -1128,7 +1128,7 @@ class testMain {
 			String salir;		
 			Partida partida = new Partida();
 			Scanner sc = new Scanner(System.in);
-			
+			int z=0;
 			int y=0;
 			while(entrada) {
 				try {
@@ -1252,7 +1252,10 @@ class testMain {
 									case 3:
 										while(!posValida) {
 											System.out.println("Elige una fila:");
-											posX = jugadas[contador][1];
+											if(z==0)
+												posX=100;
+											else
+												posX = jugadas[contador][1];
 											System.out.println(posX+"\n");
 											System.out.println("Elige una columna:");
 											posY = jugadas[contador][2];
@@ -1261,6 +1264,7 @@ class testMain {
 											if(!posValida) {
 												System.out.println("Numeros incorrectos");
 											}
+											z++;
 										}
 										if(partida.getCasilla(posX-1, posY-1).getAbierta()==true) {
 											assertEquals(partida.getCasilla(posX-1, posY-1).getAbierta(),true);
