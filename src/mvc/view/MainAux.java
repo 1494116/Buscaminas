@@ -2,11 +2,13 @@ package mvc.view;
 
 public interface MainAux {
 	//Esta interfaz la creamos para poder hacer un mock object del Main
-	int pasarNivel(int p);
+	int pasarPartida(int contador);
 	
-	int[][] pasarBombas();
+	int pasarNivel(int partida);
 	
-	int[][] pasarJugada(int p);
+	int[][] pasarBombas(int partida);
 	
-	String pasarNombre(int p);
+	int[][] pasarJugada(int partida);
+	
+	String pasarNombre(int partida);
 }

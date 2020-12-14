@@ -18,13 +18,23 @@ public class Tablero {
     	this.mockmain=m;
     }
     
-	public Tablero(int nivel) {
+	public Tablero(int nivel,int partida) {
+	/*PARA JUEGO NORMAL	
 		setNivel(nivel);
 		setMedida(nivel);
 		setBombas(nivel);
 		this.tablero=iniciarTablero();
+		crearMinas();
+		//repartirBombasManual(partida);
+	*/
+	
+	//PARA TEST	
+		setNivel(nivel);
+		setMedida(nivel);
+		//setBombas(nivel);
+		this.tablero=iniciarTablero();
 		//crearMinas();
-		repartirBombasManual();
+		repartirBombasManual(partida);
 	}
 	
 	public Casilla getCasilla(int x, int y) {
@@ -32,17 +42,19 @@ public class Tablero {
 		return c;	
 	}
 	
-	public void repartirBombasManual() {
+	public void repartirBombasManual(int partida) {
 		
         MainAuxMock mockmain= new MainAuxMock();
-        int [][] bombas=mockmain.pasarBombas();
+        int [][] bombas=mockmain.pasarBombas(partida);
+        this.bombas=bombas.length;
 		int contador = 0;
 		while(bombas_tablero<getBombas()){
 			//Creacio aleatoria fil,col per insertar mina
             int fila=bombas[contador][0];
             int columna=bombas[contador][1];
             contador++;
-			//Si no hi hamina en la pos actual -> Posem mina
+            System.out.println("Bomba en: "+fila+" "+columna);
+			//Si no hi ha mina en la pos actual -> Posem mina
 			if(this.tablero[fila][columna].getMina()==false){
 				
 				setBombasPartida(1);

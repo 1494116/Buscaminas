@@ -33,7 +33,8 @@ public class Partida {
 		this.enJuego = enJuego;
 	}
 	
-	public void setNivel(int nivel) {
+	public void setNivel(int nivel,int partida) {
+		int p = partida;
 		if(nivel > 4) {
 			this.nivel = 4;
 		}else if(nivel<1) {
@@ -41,7 +42,7 @@ public class Partida {
 		}else {
 			this.nivel = nivel;
 		}
-		tablero = new Tablero(this.nivel);
+		tablero = new Tablero(this.nivel,p);
 	}
 	
 	public int getNivel() {

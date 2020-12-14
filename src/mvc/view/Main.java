@@ -2,8 +2,6 @@ package mvc.view;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import PRAC.TQS.Vista.VistaVentanaAux;
 import mvc.controller.Partida;
 import mvc.model.Puntuaciones;
 
@@ -42,7 +40,8 @@ public class Main {
 						case 2:
 						case 3:
 						case 4:
-							partida.setNivel(opcion);
+							partida.setNivel(opcion,9);
+							//partida.setNivel(opcion);
 							partida.mostrar();
 							seguir = 0;
 							break;
