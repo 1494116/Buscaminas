@@ -28,8 +28,8 @@ public class Tablero {
 		//repartirBombasManual(partida);
 	}
 	
-	//PARA TEST
-	public Tablero(int nivel, int partida) {
+	public Tablero(int nivel,int partida) {
+	//PARA TEST	MAIN
 		setNivel(nivel);
 		setMedida(nivel);
 		//setBombas(nivel);
@@ -54,7 +54,7 @@ public class Tablero {
             int fila=bombas[contador][0];
             int columna=bombas[contador][1];
             contador++;
-            System.out.println("Bomba en: "+fila+" "+columna);
+            //System.out.println("Bomba en: "+fila+" "+columna);
 			//Si no hi ha mina en la pos actual -> Posem mina
 			if(this.tablero[fila][columna].getMina()==false){
 				

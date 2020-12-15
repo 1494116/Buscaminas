@@ -40,7 +40,7 @@ public class Main {
 						case 2:
 						case 3:
 						case 4:
-							partida.setNivel(opcion,9);
+							partida.setNivel(opcion);
 							//partida.setNivel(opcion);
 							partida.mostrar();
 							seguir = 0;
