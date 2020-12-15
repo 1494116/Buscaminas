@@ -18,17 +18,18 @@ public class Tablero {
     	this.mockmain=m;
     }
     
-	public Tablero(int nivel,int partida) {
-	/*PARA JUEGO NORMAL	
+	public Tablero(int nivel) {
+	//PARA JUEGO NORMAL	
 		setNivel(nivel);
 		setMedida(nivel);
 		setBombas(nivel);
 		this.tablero=iniciarTablero();
 		crearMinas();
 		//repartirBombasManual(partida);
-	*/
+	}
 	
-	//PARA TEST	
+	//PARA TEST
+	public Tablero(int nivel, int partida) {
 		setNivel(nivel);
 		setMedida(nivel);
 		//setBombas(nivel);

@@ -16,7 +16,7 @@ public class MainAuxMock implements MainAux{
 			jugadas= new int[][] {{3,10,11},{3,4,5}};
 			break;
 		case 1:		//Partida perdida nivel 3
-			jugadas= new int[][] {{3,5,1},{3,5,1},{3,1,5},{1,3,3},{3,2,2}};
+			jugadas= new int[][] {{3,5,1},{3,5,1},{3,1,5},{1,3,3},{2,3,3},{3,2,2}};
 			break;
 		case 2:		//Partida completa ganada nivel 2
 			jugadas= new int[][] {{3,1,1},{3,10,1},{3,1,5},{1,4,3},{1,4,8},{1,3,9},{1,7,6},{3,3,3},
