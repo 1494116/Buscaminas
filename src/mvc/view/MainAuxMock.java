@@ -113,7 +113,7 @@ public class MainAuxMock implements MainAux{
 		case 13:
 			bombas = new int[][] {{0,0},{1,1},{2,2},{3,3},{4,4}};
 			break;
-		default:
+		default:		//realmente no se deberia de entrar
 			bombas = new int[][] {{0,0},{1,1},{2,2},{3,3},{4,4},{5,5},{6,6},{7,7},{8,8},{9,9},{10,10},{11,11},{12,12},{13,13},{14,14},{15,15},{16,16},{17,17},{18,18},{19,19}};
 			break;
 		}	
@@ -131,5 +131,4 @@ public class MainAuxMock implements MainAux{
 		int [] partidas_id = {0,1,2,3,4,5,6,7,8,9,10,11,12,13};
 		return partidas_id[cont];
 	}
-
 }

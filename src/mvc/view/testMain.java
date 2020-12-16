@@ -22,6 +22,8 @@ class testMain {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
+	
+	//Partidas minimas: 6	Partidas realizadas: 14
 
 	//Test donde abriremos una casilla fuera del tablero y  mueres a la primera bomba que abres
 	@Test

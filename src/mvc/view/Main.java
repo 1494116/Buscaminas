@@ -41,7 +41,6 @@ public class Main {
 						case 3:
 						case 4:
 							partida.setNivel(opcion);
-							//partida.setNivel(opcion);
 							partida.mostrar();
 							seguir = 0;
 							break;
